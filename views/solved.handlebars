@@ -1,0 +1,14 @@
+{{#if solved}}
+	<h2>Congratulations</h2>
+	<p>You solved "{{name}}."</p>
+	{{#if done}}
+		<p>You solved all the clues!</p>
+	{{else}}
+		<p>Your next clue is <a href="/clue/{{next.id}}">{{next.name}}</a></p>
+	{{/if}}
+	<a href="/">Home</a>
+{{else}}
+	<h2>Sorry</h2>
+	<p>The code you have is not a valid clue.</p>
+	<a href="/">Home</a>
+{{/if}}

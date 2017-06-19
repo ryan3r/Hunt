@@ -1,0 +1,28 @@
+<h1>Welcome {{name}}</h1>
+<p>You have found {{clues.length}} of {{total}} clues.</p>
+<p>Hints: {{hintCount}}</p>
+<p>Time: {{time}}</p>
+<ul>
+	{{#each clues}}
+		<li><a href="/clue/{{id}}">{{name}}</a>{{#if solved}} [solved]{{/if}}</li>
+	{{/each}}
+</ul>
+<p>If the QR code for a clue failes you can enter the code here to unlock the clue.</p>
+<form action="/solve">
+	<input type="text" name="id" placeholder="Clue code"/>
+	<button type="submit">Solve</button>
+</form>
+<style>
+	.toolbar {
+		text-align: right;
+	}
+
+	.title {
+		margin-top: 0px;
+	}
+
+	li {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+</style>

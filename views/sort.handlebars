@@ -1,0 +1,53 @@
+<div class="toolbar">
+	<a href="/">Home</a>
+</div>
+<h2 class="title">Clue hunt order</h2>
+<p>
+	This is the order the clues will go in (top to bottom).  To rearrange clues
+	type a number in the box and click move. Positive numbers move a clue higher
+	in the list and negitive numbers move a clue lower in the list.  YOU MUST CLICK
+	THE MOVE BUTTON YOU WANT TO MOVE DO NOT ENTER A NEW ORDER FOR ALL THE CLUES
+	AND THEN PRESS MOVE.
+</p>
+<br/>
+<ol>
+	{{#each clues}}
+		<li>
+			<div>
+				<form method="post">
+					<input type="hidden" name="id" value="{{id}}"/>
+					<input type="number" name="amount"/>
+					<button type="Submit">Move</button>
+				</form>
+				<span class="name">{{name}}</span>
+			</div>
+			<pre>Location: {{location}}</pre>
+		</li>
+	{{/each}}
+</ol>
+<style>
+	.name {
+		margin-left: 15px;
+	}
+
+	div {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	form {
+		display: inline-block;
+	}
+
+	input {
+		max-width: 50px;
+	}
+
+	.toolbar {
+		text-align: right;
+	}
+
+	.title {
+		margin-top: 0px;
+	}
+</style>

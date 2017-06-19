@@ -1,0 +1,37 @@
+<h1>Thank you {{name}} for contributing.</h1>
+<ul>
+	{{#each clues}}
+		<li>
+			<a href="/clue/{{id}}">{{name}}</a>
+			{{#if unlocked}} (unlocked){{/if}}
+			{{#if solved}} (solved){{/if}}
+		</li>
+	{{/each}}
+</ul>
+<h3>Actions</h3>
+<ul>
+	<li><a href="/create">Create a new clue</a></li>
+	<li><a href="/print">Print QR codes</a></li>
+	<li><a href="/sort">Sort clues</a></li>
+</ul>
+<form action="/hints" method="POST">
+	<label>
+		Number of hints remaining:
+		<input type="text" style="width: 50px;" name="hints" value="{{hints}}"/>
+	</label>
+	<button type="submit">Update</button>
+</form>
+<style>
+	.toolbar {
+		text-align: right;
+	}
+
+	.title {
+		margin-top: 0px;
+	}
+
+	li {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+</style>

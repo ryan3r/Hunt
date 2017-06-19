@@ -1,0 +1,54 @@
+<div class="toolbar">
+	<a href="/">Home</a>
+</div>
+<h2 class="title">Print</h2>
+<form class="selector">
+	{{#each clues}}
+		<div>
+			<label>
+				<input name="{{id}}" type="checkbox"{{#if show}} checked{{/if}}/>
+				{{name}}
+			</label>
+		</div>
+	{{/each}}
+	<br/>
+	<button type="submit">Filter</button>
+	<p>The clue selector will automaticaly be removed from the page when you print it.</p>
+</form>
+{{#each clues}}
+	{{#if show}}
+		<div style="display: inline-block; border: 3px dashed;">
+			<div style="text-align: center;">{{name}}</div>
+			{{qr solveUrl}}
+			<div style="text-align: center;">{{solveCode}}</div>
+		</div>
+	{{/if}}
+{{/each}}
+<div style="display: inline-block; border: 3px dashed;">
+	<div style="text-align: center;">Start</div>
+	{{qr "http://10.30.163.184:9090/start"}}
+</div>
+<style>
+	.selector {
+		margin-bottom: 15px;
+	}
+
+	@media print {
+		.selector, .toolbar, .title {
+			display: none;
+		}
+
+		@page {
+			size: auto;
+			margin: 0px;
+		}
+	}
+
+	.toolbar {
+		text-align: right;
+	}
+
+	.title {
+		margin-top: 0px;
+	}
+</style>

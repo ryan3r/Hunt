@@ -1,0 +1,35 @@
+{{#if access}}
+	<div class="toolbar">
+		<a href="/">Home</a>
+	</div>
+	<h2 class="title">{{clue.name}}</h2>
+	{{#if clue.solved}}
+		<p style="color: #0d0;">This clue has been solved.</p>
+	{{/if}}
+	{{{content}}}
+	{{#if showHint}}
+		<hr/>
+		{{{hint}}}
+	{{else}}
+		<form method="POST">
+			<input type="hidden" name="command" value="show-hint"/>
+			<button type="submit">Show hint ({{hintCount}} remaining)</button>
+		</form>
+	{{/if}}
+{{else}}
+	<p>This is not a clue or you have not unlocked it yet.</p>
+{{/if}}
+<style>
+	.toolbar {
+		text-align: right;
+	}
+
+	.title {
+		margin-top: 0px;
+	}
+
+	pre {
+		word-wrap: break-word;
+		white-space: normal;
+	}
+</style>

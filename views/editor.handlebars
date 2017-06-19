@@ -1,0 +1,33 @@
+<form method="POST">
+	<div>
+		<label>
+			Clue name<br/>
+			<input type="text" name="name" placeholder="Clue name" value="{{clue.name}}"/>
+		</label>
+	</div>
+
+	<p><b>WARNING: BRYAN CAN SEE THE CLUE'S NAME</b></p>
+
+	<div>
+		<label>
+			The actual clue<br/>
+			<textarea name="content" style="width: 500px; height: 200px;">{{clue.content}}</textarea>
+		</label>
+	</div>
+
+	<div>
+		<label>
+			A hint to help Bryan solve the clue<br/>
+			<textarea name="hint" style="width: 500px; height: 200px;">{{clue.hint}}</textarea>
+		</label>
+	</div>
+
+	<div>
+		<label>
+			Exact directions for whoever places the clue.<br/>
+			<textarea name="location" style="width: 500px; height: 200px;">{{clue.location}}</textarea>
+		</label>
+	</div>
+
+	<button type="submit">Save</button>
+</form>

@@ -6,15 +6,16 @@ var handlebars = require("handlebars");
 var fs = require("fs");
 var path = require("path");
 
+const HOSTNAME = process.env.HOSTNAME || "http://localhost:9090";
 const MINUTE_IN_MS = 60000;
 const DAY_IN_MINUTES = 1440;
 const HOUR_IN_MINUTES = 60;
 
-var data = require("./data");
+var data = require("/mnt/data");
 
 // save the data
 var save = function() {
-	fs.writeFileSync("data.json", JSON.stringify(data, null, 4));
+	fs.writeFileSync("/mnt/data.json", JSON.stringify(data, null, 4));
 
 	debounceSave = true;
 };
@@ -22,7 +23,7 @@ var save = function() {
 var debounceSave, debounceTimer;
 
 // reload data when it changes
-fs.watch(path.join(__dirname, "data.json"), function() {
+fs.watch("/mnt/data.json", function() {
 	// watch can send multiple changes when writing make sure we are done
 	clearTimeout(debounceTimer);
 	debounceTimer = setTimeout(function() {
@@ -33,7 +34,7 @@ fs.watch(path.join(__dirname, "data.json"), function() {
 		}
 
 		// reload
-		data = JSON.parse(fs.readFileSync(path.join(__dirname, "data.json")));
+		data = JSON.parse(fs.readFileSync(path.join(__dirname, "/mnt/data.json")));
 	}, 3000);
 });
 
@@ -120,7 +121,7 @@ app.get("/print", function(req, res) {
 			var proto = Object.create(clue);
 
 			// add the url for when a clue is solved
-			proto.solveUrl = "http://cluehunt.localtunnel.me/solve?id=" + clue.solveCode;
+			proto.solveUrl = HOSTNAME + "/solve?id=" + clue.solveCode;
 
 			// mark the code as shown
 			proto.show = !filtered || req.query[clue.id] == "on";
@@ -138,8 +139,8 @@ app.get("/clue/:id", function(req, res) {
 	if(clue) {
 		res.render("clue", {
 			clue: clue,
-			content: fs.readFileSync(path.join(__dirname, "clues", clue.id, "content.html")),
-			hint: fs.readFileSync(path.join(__dirname, "clues", clue.id, "hint.html")),
+			content: fs.readFileSync(path.join("/mnt/clues", clue.id, "content.html")),
+			hint: fs.readFileSync(path.join("/mnt/clues", clue.id, "hint.html")),
 			showHint: clue.hintShown || clue.solved,
 			hintCount: data.hints,
 			access: clue.unlocked || clue.solved

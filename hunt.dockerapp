@@ -1,0 +1,23 @@
+version: 0.1.0
+name: hunt
+description: A simple online clue hunt app
+#namespace: ryan3r
+maintainers:
+  - name: ryan3r
+    email: ryan314r@gmail.com
+
+---
+version: "3.6"
+services:
+  hunt:
+    image: ryan3r/hunt
+    build:
+      context: .
+    ports:
+      - ${port}:9090
+    volumes:
+      - "${data}:/mnt"
+
+---
+port: 9090
+data: .
